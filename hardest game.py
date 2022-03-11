@@ -1,4 +1,4 @@
-from Classes.Jogo.Jogo import Jogo
+from Classes.Game.Game import Game
 
 if __name__ == "__main__":
-    Jogo()
+    Game()

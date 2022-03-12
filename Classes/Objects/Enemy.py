@@ -8,6 +8,3 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.vel = vel
-
-    def movement(self):
-        self.rect = self.rect

@@ -13,7 +13,6 @@ from Classes.Objects.RectangleEnemy import RectangleEnemy
 class Game:
     def __init__(self):
         self.playing = True
-        self.alive = True
         self.deaths = 0
 
         pygame.init()
@@ -29,6 +28,32 @@ class Game:
         self.text = Text(self.screen)
         self.loop()
 
+    @staticmethod
+    def circular_movement_group(x, y, angle, vel, diameter, direction, spacing, quantity):
+        enemies = []
+        for enemy in range(quantity):
+            enemy = CircularEnemy(x, y, angle, vel, diameter * spacing, direction)
+            enemies.append(enemy)
+            diameter -= 16
+        return enemies
+
+    @staticmethod
+    def vertical_movement_group(x, y, vel, ymin, ymax, quantity, spacing):
+        enemies = []
+        for enemy in range(quantity):
+            enemy = VerticalEnemy(x, y, vel, ymin, ymax)
+            enemies.append(enemy)
+            x += spacing
+        return enemies
+
+    @staticmethod
+    def horizontal_movement_group(x, y, vel, xmin, xmax, quantity, spacing):
+        enemies = []
+        for enemy in range(quantity):
+            enemy = HorizontalEnemy(x, y, vel, xmin, xmax)
+            enemies.append(enemy)
+            y += spacing
+        return enemies
 
     def create_levels(self):
         wall1 = Rectangle(71, 353, 101, 195)
@@ -69,6 +94,7 @@ class Game:
 
         walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7, wall8]
         enemies = []
+
         for enemy in enemy_group1, enemy_group2:
             enemies.append(enemy)
 
@@ -85,18 +111,20 @@ class Game:
         wall5 = Rectangle(96, 4, 212, 511)
         wall6 = Rectangle(96, 4, 500, 123)
 
-        enemy_group1 = self.horizontal_movement_group(219, 390, 3, 212, 290, 1, 0)
-        enemy_group2 = self.horizontal_movement_group(571, 198, -3, 500, 578, 1, 0)
-        enemy_group3 = self.horizontal_movement_group(219, 262, 6, 212, 578, 2, 32)
-        enemy_group4 = self.horizontal_movement_group(571, 326, -6, 212, 578, 2, 32)
+        enemy1 = HorizontalEnemy(219, 390, 3, 212, 290)
+        enemy2 = HorizontalEnemy(571, 198, -3, 500, 578)
+        enemy_group1 = self.horizontal_movement_group(219, 262, 6, 212, 578, 2, 32)
+        enemy_group2 = self.horizontal_movement_group(571, 326, -6, 212, 578, 2, 32)
 
         coin1 = Coin(219, 262)
         coin2 = Coin(571, 358)
 
         walls = [wall1, wall2, wall3, wall4, wall5, wall6]
-        enemies = []
-        for enemy in enemy_group1, enemy_group2, enemy_group3, enemy_group4:
+        enemies = [enemy1, enemy2]
+
+        for enemy in enemy_group1, enemy_group2:
             enemies.append(enemy)
+
         final = Rectangle(96, 4, 500, 187)
         coins = [coin1, coin2]
 
@@ -261,30 +289,6 @@ class Game:
 
         level8 = Level(self.screen, coins, pygame.image.load('level/level8.png'), 388, 321, walls, self, enemies, final)
         self.levels.append(level8)
-
-    def circular_movement_group(self, x, y, angle, vel, diameter, direction, spacing, quantity):
-        enemies = []
-        for enemy in range(quantity):
-            enemy = CircularEnemy(x, y, angle, vel, diameter * spacing, direction)
-            enemies.append(enemy)
-            diameter -= 16
-        return enemies
-
-    def vertical_movement_group(self, x, y, vel, ymin, ymax, quantity, spacing):
-        enemies = []
-        for enemy in range(quantity):
-            enemy = VerticalEnemy(x, y, vel, ymin, ymax)
-            enemies.append(enemy)
-            x += spacing
-        return enemies
-
-    def horizontal_movement_group(self, x, y, vel, xmin, xmax, quantity, spacing):
-        enemies = []
-        for enemy in range(quantity):
-            enemy = HorizontalEnemy(x, y, vel, xmin, xmax)
-            enemies.append(enemy)
-            y += spacing
-        return enemies
 
     def loop(self):
         clock = pygame.time.Clock()

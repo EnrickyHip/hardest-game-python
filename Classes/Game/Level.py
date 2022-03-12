@@ -34,6 +34,7 @@ class Level:
         for enemy in enemies:
             self.enemies.add(enemy)
             self.active_sprite_list.add(enemy)
+
         for coin in coins:
             self.coins.add(coin)
             self.active_sprite_list.add(coin)
@@ -44,13 +45,14 @@ class Level:
         self.active_sprite_list.draw(self.screen)
 
         for enemy in self.enemies:
+            print(enemy)
             enemy.movement()
 
-        if not self.game.alive:
+        if not self.player.alive:
             self.die()
 
-    def test_colision(self, x, y):
-        if self.game.alive:
+    def test_collision(self, x, y):
+        if self.player.alive:
             self.player.rect.x += x
             self.player.rect.y += y
         self.player.image.set_alpha(self.player.alpha)
@@ -68,12 +70,10 @@ class Level:
 
         enemy_list = pygame.sprite.spritecollide(self.player, self.enemies, False) # colisão de inimigos
         if enemy_list:
-            self.game.alive = False
-
+            self.player.alive = False
 
         if self.player.rect.colliderect(self.final.rect) and self.gotten_coins == 0:
             self.game.actual_level += 1
-            print(self.game.actual_level)
             self.game.active_sprite_list = pygame.sprite.Group()
 
         coin_list = pygame.sprite.spritecollide(self.player, self.coins, False) # colisao de moedas
@@ -87,7 +87,7 @@ class Level:
             self.player.alpha -= 7
         else:
             self.player.alpha = 255
-            self.game.alive = True
+            self.player.alive = True
             self.player.rect.x = self.spawnx
             self.player.rect.y = self.spawny
             self.game.deaths += 1

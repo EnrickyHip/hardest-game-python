@@ -45,34 +45,33 @@ class Level:
         self.active_sprite_list.draw(self.screen)
 
         for enemy in self.enemies:
-            print(enemy)
             enemy.movement()
 
-        if not self.player.alive:
+        if not self.player.get_alive():
             self.die()
 
     def test_collision(self, x, y):
-        if self.player.alive:
-            self.player.rect.x += x
-            self.player.rect.y += y
-        self.player.image.set_alpha(self.player.alpha)
+        if self.player.get_alive():
+            self.player.set_rect_x(self.player.get_rect_x() + x)
+            self.player.set_rect_y(self.player.get_rect_y() + y)
+        self.player.get_image().set_alpha(self.player.get_alpha())
 
         wall_list = pygame.sprite.spritecollide(self.player, self.walls, False) # colisão de paredes
         for wall in wall_list:
             if x > 0:
-                self.player.rect.right = wall.rect.left
+                self.player.get_rect().right = wall.rect.left
             elif x < 0:
-                self.player.rect.left = wall.rect.right
+                self.player.get_rect().left = wall.rect.right
             elif y < 0:
-                self.player.rect.top = wall.rect.bottom
+                self.player.get_rect().top = wall.rect.bottom
             elif y > 0:
-                self.player.rect.bottom = wall.rect.top
+                self.player.get_rect().bottom = wall.rect.top
 
         enemy_list = pygame.sprite.spritecollide(self.player, self.enemies, False) # colisão de inimigos
         if enemy_list:
-            self.player.alive = False
+            self.player.set_alive(False)
 
-        if self.player.rect.colliderect(self.final.rect) and self.gotten_coins == 0:
+        if self.player.get_rect().colliderect(self.final.rect) and self.gotten_coins == 0:
             self.game.actual_level += 1
             self.game.active_sprite_list = pygame.sprite.Group()
 
@@ -83,13 +82,13 @@ class Level:
                 self.gotten_coins -= 1
 
     def die(self):
-        if self.player.alpha > 0:
-            self.player.alpha -= 7
+        if self.player.get_alpha() > 0:
+            self.player.set_alpha(self.player.get_alpha() - 7)
         else:
-            self.player.alpha = 255
-            self.player.alive = True
-            self.player.rect.x = self.spawnx
-            self.player.rect.y = self.spawny
+            self.player.set_alpha(255)
+            self.player.set_alive(True)
+            self.player.set_rect_x(self.spawnx)
+            self.player.set_rect_y(self.spawny)
             self.game.deaths += 1
 
             for coin in self.coins:

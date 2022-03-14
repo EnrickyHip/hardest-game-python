@@ -3,7 +3,7 @@ from Classes.Game.Rectangle import Rectangle
 from Classes.Game.Level import Level
 from Classes.Game.Text import Text
 from Classes.Objects.Coin import Coin
-from Classes.Objects.Enemy import Enemy
+from Classes.Objects.StaticEnemy import StaticEnemy
 from Classes.Objects.VerticalEnemy import VerticalEnemy
 from Classes.Objects.HorizontalEnemy import HorizontalEnemy
 from Classes.Objects.CircularEnemy import CircularEnemy
@@ -173,17 +173,17 @@ class Game:
 
         enemy1 = VerticalEnemy(209, 123, 3, 122, 316)
         enemy2 = VerticalEnemy(241, 316, -3, 123, 317)
-        enemy3 = Enemy(275, 123, 0)
-        enemy4 = Enemy(335, 155, 0)
-        enemy5 = Enemy(369, 187, 0)
-        enemy6 = Enemy(401, 251, 0)
-        enemy7 = Enemy(369, 316, 0)
-        enemy8 = Enemy(401, 379, 0)
-        enemy9 = Enemy(369, 444, 0)
+        enemy3 = StaticEnemy(275, 123)
+        enemy4 = StaticEnemy(335, 155)
+        enemy5 = StaticEnemy(369, 187)
+        enemy6 = StaticEnemy(401, 251)
+        enemy7 = StaticEnemy(369, 316)
+        enemy8 = StaticEnemy(401, 379)
+        enemy9 = StaticEnemy(369, 444)
         enemy10 = VerticalEnemy(369, 123, 3, 122, 508)
         enemy11 = VerticalEnemy(401, 508, -3, 123, 509)
-        enemy12 = Enemy(433, 475, 0)
-        enemy13 = Enemy(496, 507, 0)
+        enemy12 = StaticEnemy(433, 475)
+        enemy13 = StaticEnemy(496, 507)
         enemy14 = VerticalEnemy(529, 283, 4, 282, 508)
         enemy15 = VerticalEnemy(561, 508, -4, 283, 509)
 
@@ -260,18 +260,18 @@ class Game:
         wall3 = Rectangle(4, 265, 265, 193)
         wall4 = Rectangle(4, 265, 534, 201)
 
-        enemy1 = Enemy(343, 275, 0)
-        enemy2 = Enemy(310, 275, 0)
-        enemy3 = Enemy(343, 241, 0)
-        enemy4 = Enemy(343, 375, 0)
-        enemy5 = Enemy(310, 375, 0)
-        enemy6 = Enemy(343, 408, 0)
-        enemy7 = Enemy(443, 375, 0)
-        enemy8 = Enemy(443, 408, 0)
-        enemy9 = Enemy(476, 375, 0)
-        enemy10 = Enemy(476, 275, 0)
-        enemy11 = Enemy(443, 275, 0)
-        enemy12 = Enemy(443, 241, 0)
+        enemy1 = StaticEnemy(343, 275)
+        enemy2 = StaticEnemy(310, 275)
+        enemy3 = StaticEnemy(343, 241)
+        enemy4 = StaticEnemy(343, 375)
+        enemy5 = StaticEnemy(310, 375)
+        enemy6 = StaticEnemy(343, 408)
+        enemy7 = StaticEnemy(443, 375)
+        enemy8 = StaticEnemy(443, 408)
+        enemy9 = StaticEnemy(476, 375)
+        enemy10 = StaticEnemy(476, 275)
+        enemy11 = StaticEnemy(443, 275)
+        enemy12 = StaticEnemy(443, 241)
         enemy13 = RectangleEnemy(343, 275, 3, 274, 374, 342, 443, 1)
         enemy14 = RectangleEnemy(310, 241, 4, 240, 407, 309, 476, 1)
         enemy15 = RectangleEnemy(276, 208, 5, 207, 440, 275, 509, 1)

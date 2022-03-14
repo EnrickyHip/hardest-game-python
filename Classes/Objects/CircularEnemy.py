@@ -3,7 +3,8 @@ import math
 
 class CircularEnemy(Enemy):
     def __init__(self, x, y, angle, vel, diameter, direction):
-        super().__init__(x, y, vel)
+        super().__init__(x, y)
+        self.vel = vel
         self.direction = direction
         self.angle = angle
         self.diameter = diameter

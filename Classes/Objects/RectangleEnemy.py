@@ -1,8 +1,9 @@
 from Classes.Objects.Enemy import Enemy
 
 class RectangleEnemy(Enemy):
-    def __init__(self, x, y, v, ymin, ymax, xmin, xmax, direction):
-        super().__init__(x, y, v)
+    def __init__(self, x, y, vel, ymin, ymax, xmin, xmax, direction):
+        super().__init__(x, y)
+        self.vel = vel
         self.xmax = xmax
         self.xmin = xmin
         self.ymax = ymax

@@ -2,7 +2,8 @@ from Classes.Objects.Enemy import Enemy
 
 class VerticalEnemy(Enemy):
     def __init__(self, x, y, vel, min, max):
-        super().__init__(x, y, vel)
+        super().__init__(x, y)
+        self.vel = vel
         self.max = max
         self.min = min
 

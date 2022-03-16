@@ -7,6 +7,7 @@
     <list default="true" id="a0d35ccc-d599-4c75-8400-982365c124a7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Classes/Game/Level.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Game/Level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Classes/Objects/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Objects/Player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,3 +1,5 @@
+#generic texts class
+
 import pygame
 
 class Text:

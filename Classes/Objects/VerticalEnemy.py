@@ -1,3 +1,5 @@
+#enemies with vertical movement. inherit from the Enemy class
+
 from Classes.Objects.Enemy import Enemy
 
 class VerticalEnemy(Enemy):

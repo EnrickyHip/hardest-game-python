@@ -1,3 +1,6 @@
+#generic rectangle class
+#its used for making walls, the level final, and also the game's on the head
+
 import pygame
 
 class Rectangle(pygame.sprite.Sprite):

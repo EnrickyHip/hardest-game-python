@@ -1,3 +1,5 @@
+#generic enemy class, it will inherit for all kind of enemy
+
 import pygame
 
 class Enemy(pygame.sprite.Sprite):

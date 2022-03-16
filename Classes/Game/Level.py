@@ -56,7 +56,7 @@ class Level:
             self.player.set_rect_y(self.player.get_rect_y() + y)
         self.player.get_image().set_alpha(self.player.get_alpha())
 
-        wall_list = pygame.sprite.spritecollide(self.player, self.walls, False) # colisão de paredes
+        wall_list = pygame.sprite.spritecollide(self.player, self.walls, False) # wall collisions
         for wall in wall_list:
             if x > 0:
                 self.player.get_rect().right = wall.rect.left
@@ -67,7 +67,7 @@ class Level:
             elif y > 0:
                 self.player.get_rect().bottom = wall.rect.top
 
-        enemy_list = pygame.sprite.spritecollide(self.player, self.enemies, False) # colisão de inimigos
+        enemy_list = pygame.sprite.spritecollide(self.player, self.enemies, False) # enemy collisions
         if enemy_list:
             self.player.set_alive(False)
 
@@ -75,7 +75,7 @@ class Level:
             self.game.actual_level += 1
             self.game.active_sprite_list = pygame.sprite.Group()
 
-        coin_list = pygame.sprite.spritecollide(self.player, self.coins, False) # colisao de moedas
+        coin_list = pygame.sprite.spritecollide(self.player, self.coins, False) # coin collisions
         for coin in coin_list:
             if coin in self.active_sprite_list:
                 self.active_sprite_list.remove(coin)

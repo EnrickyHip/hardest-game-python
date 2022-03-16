@@ -1,3 +1,6 @@
+#enemies who movement like a rectangle. inherit from the Enemy class
+#ymin, ymax, xmin and xmax delimits the rectangle which the enenmy is gonna movement
+
 from Classes.Objects.Enemy import Enemy
 
 class RectangleEnemy(Enemy):

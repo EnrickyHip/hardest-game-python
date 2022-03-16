@@ -1,3 +1,5 @@
+#main game class
+
 import pygame
 from Classes.Game.Rectangle import Rectangle
 from Classes.Game.Level import Level
@@ -28,34 +30,43 @@ class Game:
         self.text = Text(self.screen)
         self.loop()
 
-    @staticmethod
+    #these methods create group of enemies to prevent repetitions
+    @staticmethod 
     def circular_movement_group(x, y, angle, vel, diameter, direction, spacing, quantity):
         enemies = []
+
         for enemy in range(quantity):
             enemy = CircularEnemy(x, y, angle, vel, diameter * spacing, direction)
             enemies.append(enemy)
             diameter -= 16
+
         return enemies
 
     @staticmethod
     def vertical_movement_group(x, y, vel, ymin, ymax, quantity, spacing):
         enemies = []
+
         for enemy in range(quantity):
             enemy = VerticalEnemy(x, y, vel, ymin, ymax)
             enemies.append(enemy)
             x += spacing
+
         return enemies
 
     @staticmethod
     def horizontal_movement_group(x, y, vel, xmin, xmax, quantity, spacing):
         enemies = []
+
         for enemy in range(quantity):
             enemy = HorizontalEnemy(x, y, vel, xmin, xmax)
             enemies.append(enemy)
             y += spacing
+
         return enemies
 
+    #method to create all levels
     def create_levels(self):
+        #level walls, passing the coordenates and size
         wall1 = Rectangle(71, 353, 101, 195)
         wall2 = Rectangle(4, 70, 97, 124)
         wall3 = Rectangle(71, 35, 101, 89)
@@ -64,16 +75,18 @@ class Game:
         wall6 = Rectangle(70, 35, 631, 513)
         wall7 = Rectangle(459, 4, 172, 548)
 
+        #enemies
         enemy_group1 = self.vertical_movement_group(180, 97, 5, 89, 530, 7, 71)
         enemy_group2 = self.horizontal_movement_group(180, 97, 5, 172, 613, 7, 71)
 
-        final = Rectangle(4, 71, 630, 442)
-
         walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7]
         enemies = []
+
         for enemy in enemy_group1, enemy_group2:
             enemies.append(enemy)
+
         coins = []
+        final = Rectangle(4, 71, 630, 442) #level end
 
         level1 = Level(self.screen, coins, pygame.image.load('level/level1.png'), 125, 147, walls, self, enemies, final)
         self.levels.append(level1)
@@ -91,7 +104,6 @@ class Game:
         enemy_group2 = self.vertical_movement_group(278, 360, -3, 251, 365, 5, 67)
 
         coin1 = Coin(396, 308)
-
         walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7, wall8]
         enemies = []
 
@@ -152,8 +164,10 @@ class Game:
 
         walls = [wall1, wall2, wall3, wall4, wall5, wall6]
         enemies = []
+
         for enemy in enemy_group1, enemy_group2, enemy_group3, enemy_group4:
             enemies.append(enemy)
+
         final = Rectangle(4, 66, 233, 282)
         coins = [coin1, coin2, coin3, coin4, coin5, coin6]
 
@@ -246,8 +260,10 @@ class Game:
 
         walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7]
         enemies = [enemy1, enemy2]
+
         for enemy in enemy_group1, enemy_group2:
             enemies.append(enemy)
+
         coins = []
         final = Rectangle(4, 67, 534, 300)
 
@@ -290,18 +306,17 @@ class Game:
         level8 = Level(self.screen, coins, pygame.image.load('level/level8.png'), 388, 321, walls, self, enemies, final)
         self.levels.append(level8)
 
-    def loop(self):
+    def loop(self): #game loop
         clock = pygame.time.Clock()
-        janela = True
+        window = True
 
-        while janela:
+        while window:
             clock.tick(60)
-
             level = self.levels[self.actual_level]
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    janela = False
+                    window = False
 
             if self.playing:
                 level.draw()

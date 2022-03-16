@@ -1,3 +1,5 @@
+#static enemy, inherited ftom Enemy class
+
 from Classes.Objects.Enemy import Enemy
 
 

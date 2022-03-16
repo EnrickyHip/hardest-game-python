@@ -1,3 +1,5 @@
+#enemies with horizontal movement, inherit from the Enemy class
+
 from Classes.Objects.Enemy import Enemy
 
 class HorizontalEnemy(Enemy):
@@ -10,4 +12,5 @@ class HorizontalEnemy(Enemy):
     def movement(self):
         if self.rect.x >= self.max or self.rect.x <= self.min:
             self.vel *= -1
+            
         self.rect.x += self.vel

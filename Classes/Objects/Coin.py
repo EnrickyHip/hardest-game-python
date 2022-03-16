@@ -1,3 +1,4 @@
+#coin class
 import pygame
 
 class Coin(pygame.sprite.Sprite):

@@ -55,12 +55,12 @@ class Level:
         for enemy in self.enemies:
             enemy.movement()
 
-        if not self.player.get_alive():
+        if not self.player.alive:
             self.die()
 
 
     def test_collision(self, x, y):
-        self.player.get_image().set_alpha(self.player.get_alpha())
+        self.player.image.set_alpha(self.player.alpha)
 
         self.wall_collision(x, y)
         self.enemy_collision()
@@ -75,19 +75,19 @@ class Level:
 
         for wall in wall_list:
             if x > 0:
-                self.player.get_rect().right = wall.rect.left
+                self.player.rect.right = wall.rect.left
             elif x < 0:
-                self.player.get_rect().left = wall.rect.right
+                self.player.rect.left = wall.rect.right
             elif y < 0:
-                self.player.get_rect().top = wall.rect.bottom
+                self.player.rect.top = wall.rect.bottom
             elif y > 0:
-                self.player.get_rect().bottom = wall.rect.top
+                self.player.rect.bottom = wall.rect.top
 
     def enemy_collision(self):
         enemy_list = pygame.sprite.spritecollide(self.player, self.enemies, False)  # enemy collisions
 
         if enemy_list:
-            self.player.set_alive(False)
+            self.player.alive = False
 
 
     def coin_collision(self):
@@ -99,16 +99,16 @@ class Level:
                 self.left_coins -= 1
 
     def final_collision(self):
-        if self.player.get_rect().colliderect(self.final.rect) and self.left_coins == 0: # final collision
+        if self.player.rect.colliderect(self.final.rect) and self.left_coins == 0: # final collision
             self.game.actual_level += 1
             self.game.active_sprite_list = pygame.sprite.Group()
 
 
     def die(self):
         if self.decreaseAlpha():
-            self.player.set_alive(True)
-            self.player.set_rect_x(self.spawnx)
-            self.player.set_rect_y(self.spawny)
+            self.player.alive = True
+            self.player.rect.x = self.spawnx
+            self.player.rect.y = self.spawny
 
             self.game.deaths += 1
 
@@ -117,10 +117,10 @@ class Level:
                 self.left_coins = self.total_coins
 
     def decreaseAlpha(self):
-        if self.player.get_alpha() > 0:
-            self.player.set_alpha(self.player.get_alpha() - 7)
+        if self.player.alpha > 0:
+            self.player.alpha = self.player.alpha - 7
         else:
-            self.player.set_alpha(255)
+            self.player.alpha = 255
             return True
 
 

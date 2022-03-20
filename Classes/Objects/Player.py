@@ -40,37 +40,40 @@ class Player(pygame.sprite.Sprite):
 
     # GETTERS
 
-    def get_alive(self):
-        return self.alive
+    @property
+    def alive(self):
+        return self.__alive
 
-    def get_alpha(self):
-        return self.alpha
+    @property
+    def alpha(self):
+        return self.__alpha
 
-    def get_rect(self):
-        return self.rect
+    @property
+    def rect(self):
+        return self.__rect
 
-    def get_rect_x(self):
-        return self.rect.x
-
-    def get_rect_y(self):
-        return self.rect.y
-
-    def get_image(self):
-        return self.image
+    @property
+    def image(self):
+        return self.__image
 
     #SETTERS
 
-    def set_rect_x(self, value):
-        self.rect.x = value
+    @alive.setter
+    def alive(self, value):
+        self.__alive = value
 
-    def set_rect_y(self, value):
-        self.rect.y = value
+    @alpha.setter
+    def alpha(self, value):
+        self.__alpha = value
 
-    def set_alive(self, value):
-        self.alive = value
+    @image.setter
+    def image(self, value):
+        self.__image = value
 
-    def set_alpha(self, value):
-        self.alpha = value
+    @rect.setter
+    def rect(self, value):
+        self.__rect = value
+
 
 
 

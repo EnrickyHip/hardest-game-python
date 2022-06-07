@@ -16,7 +16,7 @@ class Level:
 
         self.info = Rectangle(800, 36, 0, 0)
         self.background = Background(self.backgorund, self.screen)
-        self.player = Player(self, spawnx, spawny)
+        self.player = Player(self.game, self, spawnx, spawny)
 
         self.total_coins = len(coins)
         self.left_coins = self.total_coins
@@ -31,7 +31,6 @@ class Level:
 
 
     def addSprites(self, walls, enemies, coins): #add sprites to respective group
-
         self.active_sprite_list.add(self.info)
         self.active_sprite_list.add(self.player)
 
@@ -49,78 +48,13 @@ class Level:
 
     def draw(self):
         self.background.draw()
-        self.player.test_keys(self)
+        self.player.test_keys()
         self.active_sprite_list.draw(self.screen)
 
         for enemy in self.enemies:
             enemy.movement()
 
         if not self.player.alive:
-            self.die()
-
-
-    def test_collision(self, x, y):
-        self.player.image.set_alpha(self.player.alpha)
-
-        self.wall_collision(x, y)
-        self.enemy_collision()
-        self.coin_collision()
-
-        if x == 0 and y == 0:
-            self.final_collision()
-
-
-    def wall_collision(self, x, y):
-        wall_list = pygame.sprite.spritecollide(self.player, self.walls, False) # wall collisions
-
-        for wall in wall_list:
-            if x > 0:
-                self.player.rect.right = wall.rect.left
-            elif x < 0:
-                self.player.rect.left = wall.rect.right
-            elif y < 0:
-                self.player.rect.top = wall.rect.bottom
-            elif y > 0:
-                self.player.rect.bottom = wall.rect.top
-
-    def enemy_collision(self):
-        enemy_list = pygame.sprite.spritecollide(self.player, self.enemies, False)  # enemy collisions
-
-        if enemy_list:
-            self.player.alive = False
-
-
-    def coin_collision(self):
-        coin_list = pygame.sprite.spritecollide(self.player, self.coins, False) # coin collsions
-
-        for coin in coin_list:
-            if coin in self.active_sprite_list:
-                self.active_sprite_list.remove(coin)
-                self.left_coins -= 1
-
-    def final_collision(self):
-        if self.player.rect.colliderect(self.final.rect) and self.left_coins == 0: # final collision
-            self.game.actual_level += 1
-            self.game.active_sprite_list = pygame.sprite.Group()
-
-
-    def die(self):
-        if self.decreaseAlpha():
-            self.player.alive = True
-            self.player.rect.x = self.spawnx
-            self.player.rect.y = self.spawny
-
-            self.game.deaths += 1
-
-            for coin in self.coins:
-                self.active_sprite_list.add(coin)
-                self.left_coins = self.total_coins
-
-    def decreaseAlpha(self):
-        if self.player.alpha > 0:
-            self.player.alpha = self.player.alpha - 7
-        else:
-            self.player.alpha = 255
-            return True
+            self.player.die()
 
 
